@@ -12,7 +12,7 @@ namespace TestUnit {
 
       //Native.FPDF_InitLibrary();
 
-      string File = "./../../../test.pdf";
+      string File = "./test.pdf";
 
       Console.WriteLine("\nOpen PDF file in: " + File);
 

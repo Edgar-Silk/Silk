@@ -64,11 +64,9 @@ Set-Location $WrapperDir'/'$Solution_Name
 dotnet restore
 
 buildVS -path ./TestUnit/TestUnit.csproj 
-#buildVS -path ./Silk.sln 
 
 Set-Location $WrapperDir'/'$Solution_Name'/'$Project_Name'/bin/'$Arch'/Release'
 
-./"$Project_Name.exe"
-
+& './TestUnit.exe'
 
 Set-Location $BuildDir 
