@@ -83,6 +83,7 @@
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
-    <PostBuildEvent>nuget pack $(SolutionDir)/SilkWrapper/SilkWrapper.csproj -properties "Configuration=$(Configuration);Platform=$(Platform)" -OutputDirectory  $(SolutionDir)/SilkWrapper/</PostBuildEvent>
+    <PostBuildEvent>
+    </PostBuildEvent>
   </PropertyGroup>
 </Project>
