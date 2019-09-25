@@ -6,6 +6,9 @@ MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SilkWrapper", "SilkWrapper\SilkWrapper.csproj", "{232EF348-2D15-4C5F-B9F9-8654CE21640B}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestUnit", "TestUnit\TestUnit.csproj", "{BA17C08F-EA3A-43E5-BC5C-F102E61858A9}"
+	ProjectSection(ProjectDependencies) = postProject
+		{232EF348-2D15-4C5F-B9F9-8654CE21640B} = {232EF348-2D15-4C5F-B9F9-8654CE21640B}
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
