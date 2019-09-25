@@ -57,69 +57,18 @@ function buildVS {
 
 # Get Git hub project
 $Solution_Name = 'Silk'
-$Project_Name = 'SilkWrapper'
-Write-Host "Getting Wrapper repository from github"
-
-git clone -q --branch=master 'https://github.com/Edgar-Silk/Silk' 
+$Project_Name = 'TestUnit'
 
 Set-Location $WrapperDir'/'$Solution_Name
 
-buildVS -path ./SilkWrapper/SilkWrapper.csproj 
+dotnet restore
+
+buildVS -path ./TestUnit/TestUnit.csproj 
 #buildVS -path ./Silk.sln 
 
-# Check if the DLL exist. Then, copy to Wrapper/Lib
-Write-Host "Checking for PDFium.DLL library..."
-Set-Location $BuildDir'/pdfium'
+Set-Location $WrapperDir'/'$Solution_Name'/'$Project_Name'/bin/'$Arch'/Release'
 
-if ($Arch -eq 'x64') {
-    $OUT_DLL_DIR = $BuildDir + '/Lib/x64'
-}
-elseif ($Arch -eq 'x86') {
-    $OUT_DLL_DIR = $BuildDir + '/Lib/x86'
-}
-else {
-    Write-Host "Arch not defined or invalid..."
-    Exit
-}
-
-# Copy to solution project directory
-Write-Host "Copy pdfium DLL to Wrapper solution project"
-
-$Lib_Dir  = $WrapperDir+"/"+$Solution_Name+"/"+$Project_Name+"/lib/"+$Arch
-
-if ([System.IO.Directory]::Exists( $Lib_Dir )) {
-    Set-Location $Lib_Dir
-}
-else {
-    New-Item -Path $Lib_Dir -ItemType Directory
-    Set-Location $Lib_Dir
-}
-
-if (Test-Path -Path $OUT_DLL_DIR'/pdfium.dll') {
-    Copy-Item $OUT_DLL_DIR'/pdfium.dll' -Destination $Lib_Dir
-}
-
-# Make NuGet package
-Write-Host "Make NuGet Package..."
-
-Set-Location $WrapperDir"/"$Solution_Name"/"$Project_Name
-nuget pack SilkWrapper.csproj -properties "Configuration=Release;Platform=$Arch"
-
-# Set build temporary path
-$OUT_NUGET_DIR = $BuildDir+'/NuGet/'+$Arch
-
-# Copy final NuGet package
-if ([System.IO.Directory]::Exists($OUT_NUGET_DIR)) {
-    Set-Location $OUT_NUGET_DIR
-}
-else {
-    New-Item -Path $OUT_NUGET_DIR -ItemType Directory
-    Set-Location $OUT_NUGET_DIR
-}
-
-Write-Host 'Copy NuGet files output to: ' $OUT_NUGET_DIR
-
-Copy-Item -Path "$WrapperDir/$Solution_Name/$Project_Name/*.*.*.*.nupkg" -Destination $OUT_NUGET_DIR
+./"$Project_Name.exe"
 
 
 Set-Location $BuildDir 
