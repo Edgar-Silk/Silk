@@ -51,7 +51,7 @@ function buildVS {
         }
 
         Write-Host "Building $($path)" -foregroundcolor green
-        & "$($msBuildExe)" "$($path)" /t:Build /m /p:Configuration=Release,Platform=$Arch /v:n
+        & "$($msBuildExe)" "$($path)" /t:Build /m /p:Configuration=Debug,Platform=$Arch /v:n
     }
 }
 
@@ -65,9 +65,9 @@ dotnet restore
 
 buildVS -path ./TestUnit/TestUnit.csproj 
 
-Copy-Item -Path "$WrapperDir/$Solution_Name/$Project_Name/test.pdf" -Destination $WrapperDir'/'$Solution_Name'/'$Project_Name'/bin/'$Arch'/Release'
+Copy-Item -Path "$WrapperDir/$Solution_Name/$Project_Name/test.pdf" -Destination $WrapperDir'/'$Solution_Name'/'$Project_Name'/bin/'$Arch'/Debug'
 
-Set-Location $WrapperDir'/'$Solution_Name'/'$Project_Name'/bin/'$Arch'/Release'
+Set-Location $WrapperDir'/'$Solution_Name'/'$Project_Name'/bin/'$Arch'/Debug'
 
 & './TestUnit.exe'
 
