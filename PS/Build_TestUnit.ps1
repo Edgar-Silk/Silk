@@ -65,6 +65,8 @@ dotnet restore
 
 buildVS -path ./TestUnit/TestUnit.csproj 
 
+Copy-Item -Path "$WrapperDir/$Solution_Name/$Project_Name/test.pdf" -Destination $WrapperDir'/'$Solution_Name'/'$Project_Name'/bin/'$Arch'/Release'
+
 Set-Location $WrapperDir'/'$Solution_Name'/'$Project_Name'/bin/'$Arch'/Release'
 
 & './TestUnit.exe'
