@@ -12,7 +12,7 @@ namespace TestUnit {
 
       //Native.FPDF_InitLibrary();
 
-      string File = "./test.pdf";
+      string File = "C:/Users/edgar/PDFiumTest/Silk/TestUnit/bin/x64/Release";
 
       Console.WriteLine("\nOpen PDF file in: " + File);
 
